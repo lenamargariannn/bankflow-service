@@ -69,7 +69,7 @@ jobs:
             --allow-unauthenticated
             --port=8080
             --cpu=1
-            --memory=512Mi
+            --memory=1024Mi
           # CRITICAL FIX:
           # We use the 'dev' profile to get the Secret Manager config,
           # BUT we override the database behavior to 'validate' so we don't delete data.
