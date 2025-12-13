@@ -1,4 +1,3 @@
-# yaml
 name: Deploy BankFlow to Cloud Run
 
 on:
@@ -40,6 +39,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
+      # We skip tests here because they passed in the previous job
       - name: Build Application
         run: mvn -B clean package -DskipTests
 
@@ -51,7 +51,9 @@ jobs:
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
 
-      - name: Build and Push image (Dockerfile in `/docker`)
+      # NOTE: Ensure your Dockerfile is actually inside a "docker" folder.
+      # If it is in the root, remove "docker/" from the path below.
+      - name: Build and Push image
         run: |
           IMAGE=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest
           docker build -f docker/Dockerfile -t $IMAGE .
@@ -68,5 +70,9 @@ jobs:
             --port=8080
             --cpu=1
             --memory=512Mi
+          # CRITICAL FIX:
+          # We use the 'dev' profile to get the Secret Manager config,
+          # BUT we override the database behavior to 'validate' so we don't delete data.
           env_vars: |
             SPRING_PROFILES_ACTIVE=dev
+            SPRING_JPA_HIBERNATE_DDL_AUTO=validate
