@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: bankflow-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: lenamargariann
+      POSTGRES_PASSWORD: 41734744
+      POSTGRES_DB: bankflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - bankflow_pgdata:/var/lib/postgresql/data
+    networks:
+      - bankflow-net
+
+volumes:
+  bankflow_pgdata:
+
+networks:
+  bankflow-net:
+    driver: bridge

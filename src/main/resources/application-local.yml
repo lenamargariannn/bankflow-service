@@ -1,0 +1,27 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    show-sql: true
+
+  flyway:
+    clean-disabled: false
+
+  cloud:
+    gcp:
+      secretmanager:
+        enabled: false
+      core:
+        enabled: false
+
+logging:
+  level:
+    com.bankflow: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.flywaydb: DEBUG
