@@ -2,7 +2,7 @@ spring:
   config:
     activate:
       on-profile: dev
-    import: sm://
+    import: sm://bankflow_dev_secrets
 
   cloud:
     gcp:
