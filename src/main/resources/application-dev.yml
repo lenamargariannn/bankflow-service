@@ -2,12 +2,12 @@ spring:
   config:
     activate:
       on-profile: dev
+    import: sm://
 
   cloud:
     gcp:
       secretmanager:
         enabled: true
-        fail-fast: true
 
   jpa:
     show-sql: false
