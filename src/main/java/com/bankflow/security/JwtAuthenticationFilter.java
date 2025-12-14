@@ -27,12 +27,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            String path = request.getRequestURI();
-            String method = request.getMethod();
-            log.info("=== JWT Filter Processing: {} {} ===", method, path);
-
             String jwt = getJwtFromRequest(request);
-            log.info("JWT Token present: {}", jwt);
             if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
                 String username = tokenProvider.getUsernameFromToken(jwt);
                 String roles = tokenProvider.getRolesFromToken(jwt);

@@ -37,6 +37,13 @@ Health:
 curl http://localhost:8080/api/actuator/health
 ```
 
+## API Documentation
+
+**Swagger UI**: http://localhost:8080/api/swagger-ui.html
+
+Interactive API documentation with all endpoints, request/response schemas, and authentication.
+See [SWAGGER_DOCUMENTATION.md](SWAGGER_DOCUMENTATION.md) for details.
+
 ## API (v1)
 
 ### Authentication

@@ -9,7 +9,6 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends JpaRepository<TransactionRecord, Long> {
 
-
     List<TransactionRecord> findByFromAccountIdOrToAccountIdOrderByTimestampDesc(Long fromAccountId, Long toAccountId);
 
     List<TransactionRecord> findByFromAccountIdOrderByTimestampDesc(Long fromAccountId);
