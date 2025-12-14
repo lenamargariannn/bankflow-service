@@ -15,9 +15,15 @@ spring:
   flyway:
     clean-disabled: true
 
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
 logging:
   level:
     com.bankflow: DEBUG
     org.flywaydb: INFO
     com.zaxxer.hikari.HikariConfig: DEBUG
     org.springframework.jdbc.datasource: DEBUG
+    org.springframework.cloud.gcp.secretmanager: DEBUG
