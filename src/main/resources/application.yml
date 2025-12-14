@@ -1,12 +1,6 @@
 spring:
   application:
     name: bankflow-service
-  config:
-    datasource:
-      url: ${DB_URL}
-      username: ${DB_USERNAME}
-      password: ${DB_PASSWORD}
-
   jpa:
     hibernate:
       ddl-auto: validate
@@ -29,6 +23,10 @@ spring:
   web:
     resources:
       add-mappings: false
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
 server:
   port: 8080
