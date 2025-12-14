@@ -3,15 +3,22 @@ package com.bankflow.config;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class DataSourceLogger implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
     @Override
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
+        // Fallback: print env directly as early as possible
+        String envDbUrl = System.getenv().getOrDefault("DB_URL", "NOT_SET");
+        String envDbUser = System.getenv().getOrDefault("DB_USERNAME", "NOT_SET");
+        System.out.println("[EARLY] DB_URL env var: " + envDbUrl);
+        System.out.println("[EARLY] DB_USERNAME env var: " + envDbUser);
+
         Environment env = event.getEnvironment();
 
         String dbUrlEnv = env.getProperty("DB_URL", "NOT_SET");
@@ -33,4 +40,3 @@ public class DataSourceLogger implements ApplicationListener<ApplicationEnvironm
         log.info("========================================");
     }
 }
-
