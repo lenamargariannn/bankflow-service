@@ -15,11 +15,6 @@ spring:
       core:
         enabled: false
 
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-
 logging:
   level:
     com.bankflow: DEBUG

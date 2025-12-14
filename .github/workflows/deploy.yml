@@ -50,8 +50,7 @@ jobs:
 
       - name: Build and Push image
         run: |
-          # CHANGED: We now use the Commit SHA instead of 'latest' to guarantee a unique image
-          IMAGE=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          IMAGE=${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest
           
           docker build -f docker/Dockerfile -t $IMAGE .
           docker push $IMAGE
@@ -61,8 +60,7 @@ jobs:
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
-          # CHANGED: Deploy the specific SHA version we just built
-          image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:latest
           flags: >
             --allow-unauthenticated
             --port=8080
